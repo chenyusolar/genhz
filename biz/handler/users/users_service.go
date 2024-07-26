@@ -41,7 +41,7 @@ func QueryUsers(ctx context.Context, c *app.RequestContext) {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
 		return
 	}
-	fmt.Println("Query:", req.Keyword, req.Page, req.PageSize)
+	fmt.Printf("Query:  %+v", &req)
 	resp, err := service.NewQueryUsersService(ctx, c).Run(&req)
 	if err != nil {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
@@ -61,7 +61,7 @@ func DeleteUsers(ctx context.Context, c *app.RequestContext) {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
 		return
 	}
-
+	fmt.Printf("Delete:  %+v", &req)
 	resp, err := service.NewDeleteUsersService(ctx, c).Run(&req)
 	if err != nil {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
@@ -81,7 +81,7 @@ func UpdateUsers(ctx context.Context, c *app.RequestContext) {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)
 		return
 	}
-
+	fmt.Printf("Update:  %+v", &req)
 	resp, err := service.NewUpdateUsersService(ctx, c).Run(&req)
 	if err != nil {
 		utils.SendErrResponse(ctx, c, consts.StatusOK, err)

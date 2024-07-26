@@ -2,6 +2,10 @@ package service
 
 import (
 	"context"
+	"fmt"
+	"github.com/cloudwego/hertz/pkg/common/hlog"
+	"towin/biz/dal/model"
+	"towin/biz/dal/mysql"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	users "towin/hertz_gen/users"
@@ -17,10 +21,19 @@ func NewDeleteUsersService(Context context.Context, RequestContext *app.RequestC
 }
 
 func (h *DeleteUsersService) Run(req *users.DeleteUsersRequest) (resp *users.DeleteUsersResponse, err error) {
-	//defer func() {
-	// hlog.CtxInfof(h.Context, "req = %+v", req)
-	// hlog.CtxInfof(h.Context, "resp = %+v", resp)
-	//}()
+
+	resp = &users.DeleteUsersResponse{
+		Code: users.Code_Success,
+		Msg:  "",
+	}
+
+	defer func() {
+		hlog.CtxInfof(h.Context, "req = %+v", req)
+		hlog.CtxInfof(h.Context, "resp = %+v", resp)
+	}()
 	// todo edit your code
-	return
+	ret := mysql.DB.Delete(&model.User{}, req.ID)
+	fmt.Printf("Delete: %+v", ret.Error.Error())
+
+	return resp, ret.Error
 }
