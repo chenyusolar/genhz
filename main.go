@@ -5,6 +5,7 @@ package main
 import (
 	"context"
 	"time"
+	"towin/biz/dal"
 
 	"github.com/cloudwego/hertz/pkg/app"
 	"github.com/cloudwego/hertz/pkg/app/middlewares/server/recovery"
@@ -25,7 +26,7 @@ import (
 
 func main() {
 	// init dal
-	// dal.Init()
+	dal.Init()
 	address := conf.GetConf().Hertz.Address
 	h := server.New(server.WithHostPorts(address))
 

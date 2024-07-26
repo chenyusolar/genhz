@@ -3,6 +3,7 @@ package mysql
 import (
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
+	"gorm.io/gorm/logger"
 	"towin/conf"
 )
 
@@ -16,6 +17,7 @@ func Init() {
 		&gorm.Config{
 			PrepareStmt:            true,
 			SkipDefaultTransaction: true,
+			Logger:                 logger.Default.LogMode(logger.Info),
 		},
 	)
 	if err != nil {
